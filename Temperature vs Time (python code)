@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from numpy import log
+
+path = "/Users/theo/Downloads/Temp vs V.csv"
+data = np.genfromtxt(path, delimiter=',', names=True)
+
+time = data['Time'] / 1000
+voltage = data['Volts'] / 205
+
+A = 3.3354016 * 10**-3
+B = 2.993410 * 10**-4
+C = 2.135133 * 10**-6
+D = -5.672000 * 10**-9
+R_u = 3390 * ((5 / voltage) - 1)
+R = R_u / 3390
+
+T = (A + B*log(R) + C*log(R)**2 + D*log(R)**3)**-1
+
+fig, ax = plt.subplots()
+
+ax.scatter(time, T, marker='x')
+ax.set_xlabel('Time [s]')
+ax.set_ylabel('Temperature [K]')
+ax.set_title('Temperature as a function of time')
+ax.grid()
+plt.show()
