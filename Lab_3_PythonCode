@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+path = "/Users/theo/Desktop/PHYS_371/Lab 3 Heater data.csv"
+data = np.genfromtxt(path, delimiter=',', names=True)
+data.dtype.names
+
+time = data['Time']
+potValue = data['Potentiometer']
+voltage = data['Voltage']
+
+fig, ax = plt.subplots(figsize = [8,5])
+
+ax.set_xlabel('Time [in milliseconds]')
+ax.set_ylabel('Potentiometer', color="steelblue")
+ax.plot(time, potValue, linewidth=2.0, color="steelblue", label='Potentiometer')
+
+ax.tick_params(axis='y', labelcolor="steelblue")
+ax.set_title('Temperature (Voltage) as it relates to change in Potentiometer')
+
+ax1 = ax.twinx()
+
+ax1.set_ylabel('Temperature(in terms of Voltage)', color="darkred")
+ax1.plot(time, voltage, color='darkred', marker='o', markersize=4, label='Temperature(in terms of Voltage)')
+ax1.tick_params(axis='y', labelcolor='darkred')
+
+fig.tight_layout()
+
+fig.legend(loc='lower right', bbox_to_anchor=(0.8, 0.2))
+
+plt.show()
+
+
