@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.fft import fft, fftfreq
+from scipy.fft import rfft, rfftfreq
+
+path = "/Users/theo/Desktop/PHYS_371/LightFrequency.csv"
+data = np.genfromtxt(path, delimiter=',', names=True)
+
+time = data['TIME']
+intensity = data['INTENSITY']
+
+fig, ax = plt.subplots()
+
+ax.plot(time, intensity)
+ax.set_xlabel('Time [ms]')
+ax.set_ylabel('Intensity')
+ax.grid()
+plt.show()
+
+sampleRate = 1e3
+duration = 20
+
+N = len(time)
+yf = fft(intensity)
+xf = fftfreq(N, 1 / sampleRate)
+fig, ax = plt.subplots()
+ax.plot(xf, np.abs(yf),color='blue')
+ax.set_xlabel('Frequency [Hz]')
+ax.set_ylabel('Intensity')
+ax.set_xlim(0,10)
+ax.set_ylim(0,2e6)
+ax.grid()
+plt.show()
