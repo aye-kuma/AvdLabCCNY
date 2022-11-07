@@ -1,0 +1,13 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+path = "/Users/theo/Documents/Code/TIME5, BRIGHTNESS5.csv"
+data = np.genfromtxt(path, delimiter=',', names=True)
+
+time = data['TIME5']
+brightValue = data['BRIGHTNESS5']
+
+plt.plot(time,brightValue,color="blue",label="Amplitude = 5")
+plt.xlim([1000,6000])
+plt.ylim([438,443])
+plt.show()
