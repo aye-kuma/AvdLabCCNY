@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+path = "/Users/theo/Documents/Code/TIME,BRIGHTNESS.csv"
+data = np.genfromtxt(path, delimiter=',', names=True)
+
+path1 = "/Users/theo/Documents/Code/TIME1,BRIGHTNESS1.CSV"
+data1 = np.genfromtxt(path1, delimiter=',', names=True)
+
+path5 = "/Users/theo/Documents/Code/TIME2,BRIGHTNESS2.CSV"
+data5 = np.genfromtxt(path5, delimiter=',', names=True)
+
+path10 = "/Users/theo/Documents/Code/TIME3,BRIGHTNESS3.CSV"
+data10 = np.genfromtxt(path10, delimiter=',', names=True)
+
+time = data['TIME']
+brightValue = data['BRIGHTNESS']
+
+time1 = data1['TIME1']
+brightValue1 = data1['BRIGHTNESS1']
+
+time5 = data5['TIME2']
+brightValue5 = data5['BRIGHTNESS2']
+
+time10 = data10['TIME3']
+brightValue10 = data10['BRIGHTNESS3']
+
+plt.plot(time1,brightValue1,color="lime",label="avg = 1")
+plt.plot(time5,brightValue5,color="red",label="avg = 5")
+plt.plot(time10,brightValue10,color="blue",label="avg = 10")
+plt.xlim([1000,4000])
+plt.ylim([400,450])
+plt.legend()
+plt.show()
+
