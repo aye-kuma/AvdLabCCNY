@@ -1,0 +1,96 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+testPath = "/Users/theo/Documents/Code/test.csv"
+testData = np.genfromtxt(testPath, delimiter=',', names=True)
+
+path50hz = "/Users/theo/Documents/Code/50HzRCLowPassFilter.csv"
+data50hz = np.genfromtxt(path50hz, delimiter=',', names=True)
+
+path60hz = "/Users/theo/Documents/Code/60HzRCLowPassFilter.csv"
+data60hz = np.genfromtxt(path60hz, delimiter=',', names=True)
+
+path60hzUnfiltered = "/Users/theo/Documents/Code/60HzUnfiltered.csv"
+data60hzUnfiltered = np.genfromtxt(path60hzUnfiltered, delimiter=',', names=True)
+
+path70hz = "/Users/theo/Documents/Code/70HzRCLowPassFilter.csv"
+data70hz = np.genfromtxt(path70hz, delimiter=',', names=True)
+
+path70hzUnfiltered = "/Users/theo/Documents/Code/70HzUnfiltered.csv"
+data70hzUnfiltered = np.genfromtxt(path70hzUnfiltered, delimiter=',', names=True)
+
+path80hz = "/Users/theo/Documents/Code/80HzRCLowPassFilter.csv"
+data80hz = np.genfromtxt(path80hz, delimiter=',', names=True)
+
+path80hzUnfiltered = "/Users/theo/Documents/Code/80HzUnfiltered.csv"
+data80hzUnfiltered = np.genfromtxt(path80hzUnfiltered, delimiter=',', names=True)
+
+path90hz = "/Users/theo/Documents/Code/90HzRCLowPassFilter.csv"
+data90hz = np.genfromtxt(path90hz, delimiter=',', names=True)
+
+path90hzUnfiltered = "/Users/theo/Documents/Code/90HzUnfiltered.csv"
+data90hzUnfiltered = np.genfromtxt(path90hzUnfiltered, delimiter=',', names=True)
+
+path200hz = "/Users/theo/Documents/Code/200HzRCLowPassFilter.csv"
+data200hz = np.genfromtxt(path200hz, delimiter=',', names=True)
+
+path200hzUnfiltered = "/Users/theo/Documents/Code/200HzUnfiltered.csv"
+data200hzUnfiltered = np.genfromtxt(path200hzUnfiltered, delimiter=',', names=True)
+
+
+testTime = testData['TIME']
+testPeak = testData['INTENSITY']
+
+time50hz = data50hz['TIME']
+peak50hz = data50hz['SIGNAL']
+
+time60hz = data60hz['TIME']
+peak60hz = data60hz['SIGNAL']
+
+time60hzUnfiltered = data60hzUnfiltered['TIME']
+peak60hzUnfiltered = data60hzUnfiltered['SIGNAL']
+
+time70hz = data70hz['TIME']
+peak70hz = data70hz['SIGNAL']
+
+time70hzUnfiltered = data70hzUnfiltered['TIME']
+peak70hzUnfiltered = data70hzUnfiltered['SIGNAL']
+
+time80hz = data80hz['TIME']
+peak80hz = data80hz['SIGNAL']
+
+time80hzUnfiltered = data80hzUnfiltered['TIME']
+peak80hzUnfiltered = data80hzUnfiltered['SIGNAL']
+
+time90hz = data90hz['TIME']
+peak90hz = data90hz['SIGNAL']
+
+time90hzUnfiltered = data90hzUnfiltered['TIME']
+peak90hzUnfiltered = data90hzUnfiltered['SIGNAL']
+
+time200hz = data200hz['TIME']
+peak200hz = data200hz['SIGNAL']
+
+time200hzUnfiltered = data200hzUnfiltered['TIME']
+peak200hzUnfiltered = data200hzUnfiltered['SIGNAL']
+
+
+#plt.plot(testTime,testPeak,color="dodgerblue",label="Unfiltered 50Hz")
+#plt.plot(time50hz,peak50hz,color="tomato",label="Low Pass 50Hz")
+#plt.plot(time60hzUnfiltered,peak60hzUnfiltered,color="steelblue",label="Unfiltered 60Hz")
+#plt.plot(time60hz,peak60hz,color="firebrick",label="Low Pass 60Hz")
+#plt.plot(time70hzUnfiltered,peak70hzUnfiltered,color="royalblue",label="Unfiltered 70Hz")
+#plt.plot(time70hz,peak70hz,color="salmon",label="Low Pass 70Hz")
+#plt.plot(time80hzUnfiltered,peak80hzUnfiltered,color="deepskyblue",label="Unfiltered 80Hz")
+#plt.plot(time80hz,peak80hz,color="orangered",label="Low Pass 80Hz")
+#plt.plot(time90hzUnfiltered,peak90hzUnfiltered,color="mediumblue",label="Unfiltered 90Hz")
+#plt.plot(time90hz,peak90hz,color="darkorange",label="Low Pass 90Hz")
+plt.plot(time200hzUnfiltered,peak200hzUnfiltered,color="navy",label="Unfiltered 200Hz")
+plt.plot(time200hz,peak200hz,color="sienna",label="Low Pass 200Hz")
+
+plt.xlim([10,100])
+plt.xlabel('time')
+plt.ylabel('Signal')
+plt.legend(loc = 'lower right')
+plt.grid()
+plt.show()
