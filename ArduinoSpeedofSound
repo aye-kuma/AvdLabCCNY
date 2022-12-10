@@ -1,0 +1,32 @@
+
+int trigPin=13; //Sensor Trip pin connected to Arduino pin 13
+int echoPin=11;  //Sensor Echo pin connected to Arduino pin 11
+float pingTime;
+float speedOfSound;
+float targetDistance=55; //Distance to Target in inches
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+ 
+}
+ 
+void loop() {
+  // put your main code here, to run repeatedly: 
+  
+  digitalWrite(trigPin, LOW); //Set trigger pin low
+  delayMicroseconds(2000); //Let signal settle
+  digitalWrite(trigPin, HIGH); //Set trigPin high
+  delayMicroseconds(10); //Delay in high state
+  digitalWrite(trigPin, LOW); //ping has now been sent
+  
+  pingTime = pulseIn(echoPin, HIGH);  //pingTime is presented in microceconds
+ 
+  speedOfSound = (targetDistance*2)/pingTime*(1000000)/100;        //converts to miles per hour
+  Serial.print(millis());
+  Serial.print(',');
+  Serial.println(speedOfSound);
+  delay(1000);
+  
+}
