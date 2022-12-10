@@ -1,0 +1,85 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def SpeedOfSound(TC):
+    v = 331
+    SoS = v * np.sqrt(1+(TC/273))
+    return SoS
+
+
+path1 = "/Users/theo/Documents/Code/RoomTempSeaLevel.csv"
+data1 = np.genfromtxt(path1, delimiter=',',names=True)
+
+path2 = "/Users/theo/Documents/Code/SoSBelowFreezingData.csv"
+data2 = np.genfromtxt(path2, delimiter=',',names=True)
+
+path3 = "/Users/theo/Documents/Code/RoomTemp13thFloorMarshak.csv"
+data3 =np.genfromtxt(path3, delimiter=',',names=True)
+
+path4 = "/Users/theo/Documents/Code/191StTrainStationMeasurement.csv"
+data4 = np.genfromtxt(path4, delimiter=',',names=True)
+
+path5 = "/Users/theo/Documents/Code/ByRiverSeaLevelTemp49F.csv"
+data5 =np.genfromtxt(path5, delimiter=',',names=True)
+
+time1 = np.array(data1['TIME']) /1000
+speedValue1= np.array(data1['SPEED'])
+
+time2 = np.array(data2['TIME']) / 1000
+speedValue2 = np.array(data2['SPEED']) 
+
+time3 = np.array(data3['TIME'])/ 1000
+speedValue3 = np.array(data3['SPEED'])
+
+time4 = np.array(data4['TIME']) / 1000
+speedValue4 = np.array(data4['SPEED'])
+
+time5 = np.array(data5['TIME']) / 1000
+speedValue5 = np.array(data5['SPEED'])
+
+sosValues = []
+temps = []
+
+avgSpeed1 = np.sum(speedValue1) / len(speedValue1)
+avgSpeed2 = np.sum(speedValue2) / len(speedValue2)
+avgSpeed3 = np.sum(speedValue3) / len(speedValue3)
+avgSpeed4 = np.sum(speedValue4) / len(speedValue4)
+avgSpeed5 = np.sum(speedValue5) / len(speedValue5)
+
+for i in range(-50,151):
+    sosValues.append(SpeedOfSound(i))
+    temps.append(i)
+
+
+
+
+plt.scatter(time1,speedValue1,color='dimgrey', label="@ 21" + chr(176) + "C, Street Level")
+plt.scatter(time2,speedValue2,color='red', label="@ -1.7" + chr(176) + "C, Street Level")
+plt.scatter(time3,speedValue3,color='green', label="@ 22" + chr(176) + "C, 13th Fl Marshak")
+plt.scatter(time4,speedValue4,color='blue', label="@ 20" + chr(176) + "C, 191st Train Station")
+plt.scatter(time5,speedValue5,color='orange', label="@ 9 " + chr(176) + "C, Street Level")
+plt.ylim([320,355])
+plt.xlabel('Time (in seconds)')
+plt.ylabel('Speed of Sound (in m/s)')
+plt.title('Measuring the Speed of Sound with various conditions')
+plt.rcParams['figure.dpi'] = 1200
+plt.grid()
+plt.legend()
+plt.show()
+    
+
+"plt.plot(temps,sosValues,color='black',label="Predicted by Theory")
+plt.scatter(21,avgSpeed1,color='dimgrey',label="@ 21" + chr(176) + "C, Street Level")
+plt.scatter(-1.7,avgSpeed2,color='red', label="@ -1.7" + chr(176) + "C, Street Level")
+plt.scatter(22,avgSpeed3,color='green',label="@ 22" + chr(176) + "C, 13th Fl Marshak")
+plt.scatter(20,avgSpeed4,color='blue',label="@ 20" + chr(176) + "C, 191st Train Station")
+plt.scatter(9,avgSpeed5,color='orange',label="@ 9" + chr(176) + "C, Street Level")
+plt.xlim([-5,24])
+plt.ylim([320,355])
+plt.xlabel('Temperature'+chr(176)+'C')
+plt.ylabel('Speed of Sound (m/s)')
+plt.title('Average Speed of Sound vs Temperature')
+plt.rcParams['figure.dpi'] = 1200
+plt.legend()
+plt.grid()
+plt.show()
